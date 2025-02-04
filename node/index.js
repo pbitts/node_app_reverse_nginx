@@ -10,18 +10,18 @@ const config = {
 };
 const connection = mysql.createConnection(config);
 // Insere um novo nome no banco
-const sql = `INSERT INTO people(name) values('Outro Nome aqui')`;
+const sql = `INSERT INTO people(nome) values('Outro Nome aqui')`;
 connection.query(sql);
 // Rota principal: retorna os nomes cadastrados
 app.get('/', (req, res) => {
-   connection.query('SELECT name FROM people', (err, results) => {
+   connection.query('SELECT nome FROM people', (err, results) => {
        if (err) {
            res.send('<h1>Erro ao buscar nomes</h1>');
            return;
        }
        let namesList = '<h1>Full Cycle Rocks!</h1><ul>';
        results.forEach(row => {
-           namesList += `<li>${row.name}</li>`;
+           namesList += `<li>${row.nome}</li>`;
        });
        namesList += '</ul>';
        res.send(namesList);
